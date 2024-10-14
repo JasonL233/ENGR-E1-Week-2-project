@@ -6,15 +6,6 @@
             "id": "406eadde-e01f-4e4c-b8c7-8873f4a89378",
             "actions": [
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "8730a588-b43e-4f3f-a587-dd2ac4ac9dea",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "fd3c0dfc-6479-4171-80d4-a9a9f7f1aa1f",
@@ -24,9 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "18783a35-b559-41b2-9c7d-f5f30d205c6d",
+                    "id": "450d8a86-83e6-4df3-a1aa-b537dafeded5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -34,39 +25,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "0ffc56d4-2e69-447e-bff1-3e34574cf697",
@@ -135,12 +93,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a5ce6a97-a186-4900-b7a4-f6219d21ce8e",
-                    "path": "<Mouse>/leftButton",
+                    "id": "65c14c91-430a-4c2a-8104-2c6fda98401a",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
