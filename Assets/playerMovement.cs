@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 public class playerMovement : MonoBehaviour // Defines a new class named playerMovement. 
                                             // Since it inherits from MonoBehaviour, it can be attached to a GameObject in Unity.
 {
-    [SerializeField] float boostModifier = 2f; // [SerializeField] attribute allows the variable to be editable from the Unity Inspector
+    [SerializeField] float boostModifier = 1.5f; // [SerializeField] attribute allows the variable to be editable from the Unity Inspector
     [SerializeField] float dashDuration = 0.2f;
-    [SerializeField] float dashSpeed = 10f;
+    [SerializeField] float dashSpeed = 50f;
+    [SerializeField] Animator animator;
+    SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rb = null;
     private Vector2 inputDirection = Vector2.zero;
@@ -19,6 +21,7 @@ public class playerMovement : MonoBehaviour // Defines a new class named playerM
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // This allows interaction with the physics system of the GameObject.
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void OnMove(InputValue value)
@@ -26,14 +29,33 @@ public class playerMovement : MonoBehaviour // Defines a new class named playerM
         var movementDir = value.Get<Vector2>(); // (0,1) = Up, (0,-1) = Down, (1,0) = Left, (-1,0) = Right
         Debug.Log(movementDir);
 
-        // rb.AddForce(movementDir * boostModifier, ForceMode2D.Impulse);
+        rb.velocity = movementDir * boostModifier;
 
         inputDirection = movementDir;
+
+        // Animation
+        if (Mathf.Approximately(rb.velocity.magnitude, 0))
+        {
+            animator.SetBool("running", false);
+        }
+        else
+        {
+            animator.SetBool("running", true);
+        }
+
+        if (movementDir.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (movementDir.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     void OnDash()
     {
-        if (canDash) 
+        if (canDash)
         {
             StartCoroutine(Dash());
         }
@@ -45,7 +67,7 @@ public class playerMovement : MonoBehaviour // Defines a new class named playerM
 
         if (!isDashing)
         {
-            rb.AddForce(inputDirection * boostModifier); // The Update method is called once per frame.
+            // rb.AddForce(inputDirection * boostModifier); // The Update method is called once per frame.
         }
     }
 
@@ -63,7 +85,7 @@ public class playerMovement : MonoBehaviour // Defines a new class named playerM
         isDashing = false;
 
         rb.velocity = inputDirection * boostModifier;
-        canDash = true; 
+        canDash = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collsion)
